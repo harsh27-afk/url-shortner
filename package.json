@@ -4,13 +4,15 @@
   "description": "a url shortner service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "author": "harshvardhan sankpal",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.1",
     "mongoose": "^8.8.1",
-    "nanoid": "^5.0.8"
+    "nanoid": "^5.0.8",
+    "nodemon": "^3.1.7",
+    "shortid": "^2.2.16"
   }
 }
