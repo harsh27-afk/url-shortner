@@ -1,7 +1,9 @@
 const express=require("express")
 const {connectDB}=require("./connection.js")
 const urlRouter=require("./routes/routes.url.js")
+const staticRouter=require("./routes/staticRouter.js")
 const Url=require("./models/models.url.js")
+const path=require("path")
 const app=express();
 
 // connecting to database
@@ -9,12 +11,21 @@ connectDB("mongodb://localhost:27017/url")  // last wala is database name
 .then(()=>console.log("database connected successfully"))
 .catch((err)=>console.log("error while connecting to db: ", err))
 
+app.set("view engine", "ejs")
+app.set("views",path.resolve("./views"))
+
 //middlewares
 app.use(express.json());
-
+app.use(express.urlencoded({extended:false}))
 
 // Routes
+
+
+
 app.use("/url",urlRouter);
+
+app.use("/",staticRouter);
+
 
 app.get("/:shortId",async (req,res)=>{
     const shortId=req.params.shortId;
@@ -27,19 +38,17 @@ app.get("/:shortId",async (req,res)=>{
             }
         }
     })
-    res.redirect(entry.redirectURL);
-})
-
-app.get("/analytics/:shortId",async (req,res)=>{
-    const shortId=req.params.shortId;
-      const result=await Url.findOne({shortId});
-      return res.json({clicks:result.visitHistory.length})
-      
-      
+    if (entry && entry.redirectURL) {
+        return res.redirect(entry.redirectURL);
+    } else {
+        return res.status(404).send("Entry not found.");
+    }
 })
 
 
 
+
+// port defined
 const port=5000;
 
 app.listen(port, ()=>{
