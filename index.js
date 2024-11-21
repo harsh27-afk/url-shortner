@@ -11,6 +11,7 @@ connectDB("mongodb://localhost:27017/url")  // last wala is database name
 .then(()=>console.log("database connected successfully"))
 .catch((err)=>console.log("error while connecting to db: ", err))
 
+// templating engine settings for ssr
 app.set("view engine", "ejs")
 app.set("views",path.resolve("./views"))
 
