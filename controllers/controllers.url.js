@@ -7,6 +7,7 @@ async function handleGenerateShortUrl(req,res){
         res.status(400).json({err:"url required"});
       }
 
+      
       const shortId=shortid(7);
       await Url.create({
          shortId:shortId,
@@ -14,7 +15,9 @@ async function handleGenerateShortUrl(req,res){
          viewHistory:[]
       })
 
-      return res.status(201).json({id:shortId});
+      return res.render("home", {id:shortId})
+
+      // return res.status(201).json({id:shortId});
 
 }
 

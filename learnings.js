@@ -10,9 +10,9 @@
 //    the controller of that route /url/
 // 
 // 
-// 
-// 
-// 
+// 5)Authentication has 2 patterns
+//  a) stateful : data is maintained/mapped
+//  b) stateless: 
 // 
 // 
 // 
