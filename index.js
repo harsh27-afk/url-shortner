@@ -1,7 +1,10 @@
 const express=require("express")
 const {connectDB}=require("./connection.js")
+
 const urlRouter=require("./routes/routes.url.js")
 const staticRouter=require("./routes/staticRouter.js")
+const userRouter=require("./routes/user.js")
+
 const Url=require("./models/models.url.js")
 const path=require("path")
 const app=express();
@@ -26,6 +29,8 @@ app.use(express.urlencoded({extended:false}))
 app.use("/url",urlRouter);
 
 app.use("/",staticRouter);
+
+app.use("/user",userRouter)
 
 
 app.get("/:shortId",async (req,res)=>{
